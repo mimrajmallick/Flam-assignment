@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Bézier Curve with Physics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Bézier Curve with Physics</h1>
+        <p class="subtitle">Move mouse to control the curve | Drag points directly</p>
+        
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+            <div class="fps-counter">FPS: <span id="fps">60</span></div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>
+                    <span>Stiffness:</span>
+                    <input type="range" id="stiffness" min="0.01" max="0.2" step="0.01" value="0.08">
+                    <span id="stiffnessValue" class="value">0.08</span>
+                </label>
+            </div>
+            
+            <div class="control-group">
+                <label>
+                    <span>Damping:</span>
+                    <input type="range" id="damping" min="0.8" max="0.99" step="0.01" value="0.92">
+                    <span id="dampingValue" class="value">0.92</span>
+                </label>
+            </div>
+            
+            <div class="button-group">
+                <button id="resetBtn">Reset Curve</button>
+                <button id="modeBtn">Enable Motion Control</button>
+            </div>
+            
+            <div class="info">
+                <span id="mode">Mode: Mouse</span> | 
+                <span id="points">Sampling: 100 points</span>
+            </div>
+        </div>
+        
+        <div class="math-info">
+            <h3>Bézier Curve Formulas:</h3>
+            <div class="formula">
+                B(t) = (1−t)³P₀ + 3(1−t)²tP₁ + 3(1−t)t²P₂ + t³P₃
+            </div>
+            <div class="formula">
+                B'(t) = 3(1−t)²(P₁−P₀) + 6(1−t)t(P₂−P₁) + 3t²(P₃−P₂)
+            </div>
+            <div class="formula">
+                Spring: acceleration = -k × (position - target) - damping × velocity
+            </div>
+        </div>
+    </div>
+
+    <script src="bezier.js"></script>
+</body>
+</html>
